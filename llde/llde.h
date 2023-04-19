@@ -9,22 +9,23 @@ namespace Pedro
     {
     private:
         int quantidadeElementos;
-        no* inicio;
-        no* fim;
+        no *inicio;
+        no *fim;
+
     public:
         llde();
-        bool estaVazia()const;
+        bool estaVazia() const;
         void inserirInicio(int entrada);
-        int acessarInicio()const;
+        int acessarInicio() const;
         int retirarInicio();
         void inserirFim(int entrada);
-        int acessarFim()const;
+        int acessarFim() const;
         int retirarFim();
         void inserirPosicao(int posicao, int entrada);
-        int acessarPosicao(int posicao)const;
+        int acessarPosicao(int posicao) const;
         int retirarPosicao(int posicao);
-        QString obterDados()const;
-        int getQuantidadeElementos()const;
+        QString obterDados() const;
+        int getQuantidadeElementos() const;
     };
 }
 

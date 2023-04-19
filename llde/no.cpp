@@ -1,17 +1,16 @@
 #include "no.h"
 
-namespace Pedro {
-    no::no():
-    dado(0),
-    proximo(0),
-    anterior(0)
+namespace Pedro
+{
+    no::no() : dado(0),
+               proximo(0),
+               anterior(0)
     {
     }
 
-    no::no(int dado):
-        dado(dado),
-        proximo(0),
-        anterior(0)
+    no::no(int dado) : dado(dado),
+                       proximo(0),
+                       anterior(0)
     {
     }
 

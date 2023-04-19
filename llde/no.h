@@ -1,15 +1,15 @@
 #ifndef NO_H
 #define NO_H
 
-
 namespace Pedro
 {
     class no
     {
     private:
         int dado;
-        no* proximo;
-        no* anterior;
+        no *proximo;
+        no *anterior;
+
     public:
         no();
         no(int);

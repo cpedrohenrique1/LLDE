@@ -1,9 +1,8 @@
 #include "llde.h"
 
-Pedro::llde::llde():
-    quantidadeElementos(0),
-    inicio(0),
-    fim(0)
+Pedro::llde::llde() : quantidadeElementos(0),
+                      inicio(0),
+                      fim(0)
 {
 }
 
@@ -14,8 +13,9 @@ bool Pedro::llde::estaVazia() const
 
 void Pedro::llde::inserirInicio(int entrada)
 {
-    try{
-        no* aux = new no(entrada);
+    try
+    {
+        no *aux = new no(entrada);
         if (estaVazia())
         {
             inicio = fim = aux;
@@ -26,34 +26,39 @@ void Pedro::llde::inserirInicio(int entrada)
         aux->setProximo(inicio);
         inicio = aux;
         quantidadeElementos++;
-    }catch (std::bad_alloc &erro)
+    }
+    catch (std::bad_alloc &erro)
     {
         throw QString("Nao foi possivel alocar memoria - inserirInicio");
     }
 }
 
-QString Pedro::llde::obterDados()const
+QString Pedro::llde::obterDados() const
 {
     QString resultado = "";
-    no* aux = inicio;
+    no *aux = inicio;
     for (int i = 0; i < quantidadeElementos; i++)
     {
-        resultado += QString::number(aux->getDado()) + " ";
+        if (i == 0)
+        {
+            resultado += "|" + QString::number(aux->getDado()) + "|";
+        }
+        resultado += "-> |" + QString::number(aux->getDado()) + "|";
         aux = aux->getProximo();
     }
     if (estaVazia())
     {
-        resultado = "(lista esta vazia)";
+        return "(lista esta vazia)";
     }
     return resultado;
 }
 
-int Pedro::llde::getQuantidadeElementos()const
+int Pedro::llde::getQuantidadeElementos() const
 {
     return quantidadeElementos;
 }
 
-int Pedro::llde::acessarInicio()const
+int Pedro::llde::acessarInicio() const
 {
     if (estaVazia())
     {
@@ -69,11 +74,15 @@ int Pedro::llde::retirarInicio()
         throw QString("Nao foi possivel retirar, lista ja vazia");
     }
     int valor = inicio->getDado();
-    no* aux = inicio;
+    no *aux = inicio;
     inicio = inicio->getProximo();
     if (inicio)
     {
         inicio->setAnterior(nullptr);
+    }
+    else
+    {
+        delete inicio;
     }
     delete aux;
     quantidadeElementos--;
@@ -85,14 +94,18 @@ void Pedro::llde::inserirFim(int entrada)
     if (estaVazia())
     {
         inserirInicio(entrada);
+        return;
     }
-    try {
-        no* aux = new no(entrada);
+    try
+    {
+        no *aux = new no(entrada);
         fim->setProximo(aux);
         aux->setAnterior(fim);
         fim = aux;
         quantidadeElementos++;
-    } catch (std::bad_alloc &erro) {
+    }
+    catch (std::bad_alloc &erro)
+    {
         throw QString("Nao foi possivel alocar memoria");
     }
 }
@@ -112,10 +125,17 @@ int Pedro::llde::retirarFim()
     {
         throw QString("Nao foi possivel retirar, lista ja vazia");
     }
-    no* aux = fim;
+    no *aux = fim;
     int valor = fim->getDado();
     fim = fim->getAnterior();
-    aux->setAnterior(nullptr);
+    if (fim)
+    {
+        fim->setProximo(nullptr);
+    }
+    else
+    {
+        delete fim;
+    }
     delete aux;
     quantidadeElementos--;
     return valor;
@@ -127,7 +147,7 @@ void Pedro::llde::inserirPosicao(int posicao, int entrada)
     {
         throw QString("Posicao invalida");
     }
-    if (estaVazia())
+    if (estaVazia() || posicao == 0)
     {
         inserirInicio(entrada);
         return;
@@ -137,28 +157,23 @@ void Pedro::llde::inserirPosicao(int posicao, int entrada)
         inserirFim(entrada);
         return;
     }
-    if (posicao == 0)
+    try
     {
-        inserirInicio(entrada);
-        return;
-    }
-    try {
-        no* novo = new no(entrada);
-        no* aux = inicio;
+        no *novo = new no(entrada);
+        no *aux = inicio;
         for (int i = 0; i < posicao; i++)
         {
             aux = aux->getProximo();
         }
-        no* anterior = aux->getAnterior();
-        aux->setAnterior(novo);
+        no *anterior = aux->getAnterior();
+        anterior->setProximo(novo);
+        novo->setAnterior(anterior);
         novo->setProximo(aux);
-        if (anterior)
-        {
-            anterior->setProximo(novo);
-            novo->setAnterior(anterior);
-        }
+        aux->setAnterior(novo);
         quantidadeElementos++;
-    } catch (std::bad_alloc &erro) {
+    }
+    catch (std::bad_alloc &erro)
+    {
         throw QString("Nao foi possivel alocar memoria");
     }
 }
@@ -173,7 +188,7 @@ int Pedro::llde::acessarPosicao(int posicao) const
     {
         throw QString("Lista vazia");
     }
-    no* aux = inicio;
+    no *aux = inicio;
     for (int i = 0; i < posicao; i++)
     {
         aux = aux->getProximo();
@@ -199,17 +214,15 @@ int Pedro::llde::retirarPosicao(int posicao)
     {
         return retirarInicio();
     }
-    no* aux = inicio;
+    no *aux = inicio;
     for (int i = 0; i < posicao; i++)
     {
         aux = aux->getProximo();
     }
-    no* anterior = aux->getAnterior();
-    no* proximo = aux->getProximo();
-    if (anterior)
-    {
-        anterior->setProximo(proximo);
-    }
+    no *anterior = aux->getAnterior();
+    no *proximo = aux->getProximo();
+    anterior->setProximo(proximo);
+    proximo->setAnterior(anterior);
     int valor = aux->getDado();
     delete aux;
     quantidadeElementos--;

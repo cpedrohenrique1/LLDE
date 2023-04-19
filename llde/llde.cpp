@@ -43,7 +43,10 @@ QString Pedro::llde::obterDados() const
         {
             resultado += "|" + QString::number(aux->getDado()) + "|";
         }
-        resultado += "-> |" + QString::number(aux->getDado()) + "|";
+        else
+        {
+            resultado += " -> |" + QString::number(aux->getDado()) + "|";
+        }
         aux = aux->getProximo();
     }
     if (estaVazia())

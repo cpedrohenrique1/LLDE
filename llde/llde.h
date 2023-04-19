@@ -14,11 +14,17 @@ namespace Pedro
     public:
         llde();
         bool estaVazia()const;
-        void inserirInicio(int);
-        QString obterDados();
-        int getQuantidadeElementos();
-        int acessarInicio();
+        void inserirInicio(int entrada);
+        int acessarInicio()const;
         int retirarInicio();
+        void inserirFim(int entrada);
+        int acessarFim()const;
+        int retirarFim();
+        void inserirPosicao(int posicao, int entrada);
+        int acessarPosicao(int posicao)const;
+        int retirarPosicao(int posicao);
+        QString obterDados()const;
+        int getQuantidadeElementos()const;
     };
 }
 

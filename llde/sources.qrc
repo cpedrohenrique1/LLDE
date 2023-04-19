@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>images/icons/acessar.png</file>
+        <file>images/icons/adicionar.png</file>
+        <file>images/icons/remover.png</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/images/logo.png</file>
+        <file>images/images/foto.jpeg</file>
+    </qresource>
+</RCC>

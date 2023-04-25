@@ -128,6 +128,15 @@ int Pedro::llde::retirarFim()
     {
         throw QString("Nao foi possivel retirar, lista ja vazia");
     }
+    if (quantidadeElementos == 1)
+    {
+        no* aux = fim;
+        quantidadeElementos = 0;
+        inicio = fim = 0;
+        int valor = aux->getDado();
+        delete aux;
+        return valor;
+    }
     no *aux = fim;
     int valor = fim->getDado();
     fim = fim->getAnterior();

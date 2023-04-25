@@ -76,6 +76,15 @@ int Pedro::llde::retirarInicio()
     {
         throw QString("Nao foi possivel retirar, lista ja vazia");
     }
+    if (quantidadeElementos == 1)
+    {
+        no* aux = inicio;
+        quantidadeElementos = 0;
+        fim = inicio = 0;
+        int valor = aux->getDado();
+        delete aux;
+        return valor;
+    }
     int valor = inicio->getDado();
     no *aux = inicio;
     inicio = inicio->getProximo();
@@ -210,13 +219,13 @@ int Pedro::llde::acessarPosicao(int posicao) const
 
 int Pedro::llde::retirarPosicao(int posicao)
 {
-    if (posicao < 0 || posicao >= quantidadeElementos)
-    {
-        throw QString("Posicao invalida");
-    }
     if (estaVazia())
     {
         throw QString("Lista ja vazia");
+    }
+    if (posicao < 0 || posicao >= quantidadeElementos)
+    {
+        throw QString("Posicao invalida");
     }
     if (posicao == quantidadeElementos - 1)
     {

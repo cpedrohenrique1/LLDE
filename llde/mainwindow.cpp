@@ -167,6 +167,23 @@ void MainWindow::on_pushButton_inserirPosicao_clicked()
 void MainWindow::on_pushButton_acessarPosicao_clicked()
 {
     try {
+        if (ui->lineEdit_inputPosicao->text().isEmpty())
+        {
+            throw QString("Posicao esta vazio");
+        }
+        if (ui->lineEdit_inputPosicao->text().toInt() != ui->lineEdit_inputPosicao->text().toFloat())
+        {
+            throw QString("Valor posicao nao eh inteiro");
+        }
+        caracter = ui->lineEdit_inputPosicao->text();
+        for (int i = 0; i < caracter.size(); i++)
+        {
+            if ((caracter[i] < '0' || caracter[i] > '9') && caracter[i] != '-')
+            {
+                throw QString("So podem ser inseridos numeros");
+            }
+        }
+        
         ui->lineEdit_inputValor->setText(QString::number(lista.acessarPosicao(ui->lineEdit_inputPosicao->text().toInt())));
         ui->lineEdit_inputPosicao->clear();
     }catch(QString &erro)
@@ -179,6 +196,23 @@ void MainWindow::on_pushButton_acessarPosicao_clicked()
 void MainWindow::on_pushButton_retirarPosicao_clicked()
 {
     try {
+        if (ui->lineEdit_inputPosicao->text().isEmpty())
+        {
+            throw QString("Posicao esta vazio");
+        }
+        if (ui->lineEdit_inputPosicao->text().toInt() != ui->lineEdit_inputPosicao->text().toFloat())
+        {
+            throw QString("Valor posicao nao eh inteiro");
+        }
+        caracter = ui->lineEdit_inputPosicao->text();
+        for (int i = 0; i < caracter.size(); i++)
+        {
+            if ((caracter[i] < '0' || caracter[i] > '9') && caracter[i] != '-')
+            {
+                throw QString("So podem ser inseridos numeros");
+            }
+        }
+        
         ui->lineEdit_inputValor->setText(QString::number(lista.retirarPosicao(ui->lineEdit_inputPosicao->text().toInt())));
         ui->lineEdit_inputPosicao->clear();
         ui->textEdit_output->setText(lista.obterDados());

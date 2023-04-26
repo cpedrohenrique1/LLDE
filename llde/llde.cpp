@@ -35,6 +35,10 @@ void Pedro::llde::inserirInicio(int entrada)
 
 QString Pedro::llde::obterDados() const
 {
+    if (estaVazia())
+    {
+        return "(lista esta vazia)";
+    }
     QString resultado = "";
     no *aux = inicio;
     for (int i = 0; i < quantidadeElementos; i++)
@@ -48,10 +52,6 @@ QString Pedro::llde::obterDados() const
             resultado += " -> |" + QString::number(aux->getDado()) + "|";
         }
         aux = aux->getProximo();
-    }
-    if (estaVazia())
-    {
-        return "(lista esta vazia)";
     }
     return resultado;
 }
@@ -88,14 +88,7 @@ int Pedro::llde::retirarInicio()
     int valor = inicio->getDado();
     no *aux = inicio;
     inicio = inicio->getProximo();
-    if (inicio)
-    {
-        inicio->setAnterior(nullptr);
-    }
-    else
-    {
-        delete inicio;
-    }
+    inicio->setAnterior(0);
     delete aux;
     quantidadeElementos--;
     return valor;
@@ -149,14 +142,7 @@ int Pedro::llde::retirarFim()
     no *aux = fim;
     int valor = fim->getDado();
     fim = fim->getAnterior();
-    if (fim)
-    {
-        fim->setProximo(nullptr);
-    }
-    else
-    {
-        delete fim;
-    }
+    fim->setProximo(0);
     delete aux;
     quantidadeElementos--;
     return valor;
@@ -181,10 +167,22 @@ void Pedro::llde::inserirPosicao(int posicao, int entrada)
     try
     {
         no *novo = new no(entrada);
-        no *aux = inicio;
-        for (int i = 0; i < posicao; i++)
+        no* aux;
+        if (posicao < quantidadeElementos / 2)
         {
-            aux = aux->getProximo();
+            aux = inicio;
+            for (int i = 0; i < posicao; i++)
+            {
+                aux = aux->getProximo();
+            }
+        }
+        else
+        {
+            aux = fim;
+            for (int i = quantidadeElementos - 1; i > posicao; i--)
+            {
+                aux = aux->getAnterior();
+            }
         }
         no *anterior = aux->getAnterior();
         anterior->setProximo(novo);
@@ -209,12 +207,32 @@ int Pedro::llde::acessarPosicao(int posicao) const
     {
         throw QString("Lista vazia");
     }
-    no *aux = inicio;
-    for (int i = 0; i < posicao; i++)
+    if (posicao == 0)
     {
-        aux = aux->getProximo();
+        return acessarInicio();
     }
-    return aux->getDado();
+    if (posicao == quantidadeElementos - 1)
+    {
+        return acessarFim();
+    }
+    if (posicao < quantidadeElementos / 2)
+    {
+        no *aux = inicio;
+        for (int i = 0; i < posicao; i++)
+        {
+            aux = aux->getProximo();
+        }
+        return aux->getDado();
+    }
+    else
+    {
+        no *aux = fim;
+        for (int i = quantidadeElementos - 1; i > posicao; i--)
+        {
+            aux = aux->getAnterior();
+        }
+        return aux->getDado();
+    }
 }
 
 int Pedro::llde::retirarPosicao(int posicao)
@@ -235,10 +253,22 @@ int Pedro::llde::retirarPosicao(int posicao)
     {
         return retirarInicio();
     }
-    no *aux = inicio;
-    for (int i = 0; i < posicao; i++)
+    no* aux;
+    if (posicao < quantidadeElementos / 2)
     {
-        aux = aux->getProximo();
+        aux = inicio;
+        for (int i = 0; i < posicao; i++)
+        {
+            aux = aux->getProximo();
+        }
+    }
+    else
+    {
+        aux = fim;
+        for (int i = quantidadeElementos - 1; i > posicao; i--)
+        {
+            aux = aux->getAnterior();
+        }
     }
     no *anterior = aux->getAnterior();
     no *proximo = aux->getProximo();

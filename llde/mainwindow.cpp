@@ -175,7 +175,7 @@ void MainWindow::on_pushButton_acessarPosicao_clicked()
         {
             throw QString("Valor posicao nao eh inteiro");
         }
-        caracter = ui->lineEdit_inputPosicao->text();
+        QString caracter = ui->lineEdit_inputPosicao->text();
         for (int i = 0; i < caracter.size(); i++)
         {
             if ((caracter[i] < '0' || caracter[i] > '9') && caracter[i] != '-')
@@ -204,7 +204,7 @@ void MainWindow::on_pushButton_retirarPosicao_clicked()
         {
             throw QString("Valor posicao nao eh inteiro");
         }
-        caracter = ui->lineEdit_inputPosicao->text();
+        QString caracter = ui->lineEdit_inputPosicao->text();
         for (int i = 0; i < caracter.size(); i++)
         {
             if ((caracter[i] < '0' || caracter[i] > '9') && caracter[i] != '-')

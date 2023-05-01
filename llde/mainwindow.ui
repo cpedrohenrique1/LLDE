@@ -81,7 +81,7 @@
       <x>170</x>
       <y>30</y>
       <width>321</width>
-      <height>151</height>
+      <height>154</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -132,6 +132,23 @@
         <widget class="QPushButton" name="pushButton_inserirPosicao">
          <property name="text">
           <string>Posicao</string>
+         </property>
+         <property name="icon">
+          <iconset resource="sources.qrc">
+           <normaloff>:/icons/images/icons/adicionar.png</normaloff>:/icons/images/icons/adicionar.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_inserirOrdenado">
+         <property name="text">
+          <string>Ordenado</string>
          </property>
          <property name="icon">
           <iconset resource="sources.qrc">
@@ -324,7 +341,7 @@
      <x>0</x>
      <y>0</y>
      <width>692</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

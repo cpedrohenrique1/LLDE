@@ -61,6 +61,26 @@ int Pedro::llde::getQuantidadeElementos() const
     return quantidadeElementos;
 }
 
+void Pedro::llde::inserirOrdenado(int entrada)
+{
+    if (estaVazia())
+    {
+        inserirInicio(entrada);
+        return;
+    }
+    no* aux = inicio;
+    int indice = 0;
+    for (int i = 0; i < quantidadeElementos; i++)
+    {
+        if (entrada > aux->getDado())
+        {
+            indice = i + 1;
+        }
+        aux = aux->getProximo();
+    }
+    inserirPosicao(indice, entrada);
+}
+
 int Pedro::llde::acessarInicio() const
 {
     if (estaVazia())

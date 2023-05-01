@@ -222,3 +222,26 @@ void MainWindow::on_pushButton_retirarPosicao_clicked()
     }
 }
 
+void MainWindow::on_pushButton_inserirOrdenado_clicked()
+{
+    if (ui->lineEdit_inputValor->text().isEmpty())
+    {
+        throw QString("Valor esta vazio");
+    }
+    if (ui->lineEdit_inputValor->text().toInt() != ui->lineEdit_inputValor->text().toFloat())
+    {
+        throw QString("Valor nao eh inteiro");
+    }
+    QString caracter = ui->lineEdit_inputValor->text();
+    for (int i = 0; i < caracter.size(); i++)
+    {
+        if ((caracter[i] < '0' || caracter[i] > '9') && caracter[i] != '-')
+        {
+            throw QString("So podem ser inseridos numeros");
+        }
+    }
+    lista.inserirOrdenado(ui->lineEdit_inputValor->text().toInt());
+    ui->lineEdit_inputValor->clear();
+    ui->textEdit_output->setText(lista.obterDados());
+}
+

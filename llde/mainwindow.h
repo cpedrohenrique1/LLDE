@@ -36,6 +36,10 @@ private slots:
 
     void on_pushButton_retirarPosicao_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_inserirOrdenado_clicked();
+
 private:
     Ui::MainWindow *ui;
     Pedro::llde lista;

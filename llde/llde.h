@@ -26,6 +26,7 @@ namespace Pedro
         int retirarPosicao(int posicao);
         QString obterDados() const;
         int getQuantidadeElementos() const;
+        void inserirOrdenado(int entrada);
     };
 }
 
